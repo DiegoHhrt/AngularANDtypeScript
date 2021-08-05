@@ -1,4 +1,4 @@
-import { Product, calculaISV } from './ejercicios/06-desestrucArgumentos';
+import { Product, calculaISV } from './06-desestrucArgumentos';
 
 /*
     ===== Código de TypeScript =====
