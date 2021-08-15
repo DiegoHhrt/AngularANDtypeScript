@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Character } from '../Interfaces/aot.interface';
+import { Component} from '@angular/core';
 import { AotService } from '../services/aot.service';
 
 @Component({
@@ -7,7 +6,6 @@ import { AotService } from '../services/aot.service';
   templateUrl: './characters.component.html',
 })
 export class CharactersComponent{
- // @Input('data') characters: Character []=[];
 
   get characters(){
     return this.aotService.characters;
