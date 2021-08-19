@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { GifsService } from '../../gfs/services/gifs.service';
 
 @Component({
   selector: 'app-search',
@@ -6,11 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
 
-  constructor() { }
+  @ViewChild('txtSearch') txtSearch!:ElementRef<HTMLInputElement>;
 
-  ngOnInit(): void {
+  constructor (private gifsService:GifsService) {}
+  search ()
+  {
+    const searchedItem = this.txtSearch.nativeElement.value;
+    
+    if(searchedItem.trim().length!==0)
+    {
+      this.gifsService.searchGif(searchedItem);
+  
+      this.txtSearch.nativeElement.value='';
+    }
+
   }
 
 }
