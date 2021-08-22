@@ -1,0 +1,20 @@
+<h1>By capital</h1>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <app-country-input placeHolder="Search capital..." (onEnter)=search($event)></app-country-input>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="havingError" class="alert alert-danger">
+    The term "<strong><i>{{term}}</i></strong>" has not been found
+</div>
+
+<div *ngIf="!havingError" class="row">
+    <div class="col">
+        <app-country-table [table]='countries' ></app-country-table>
+    </div>
+</div>
