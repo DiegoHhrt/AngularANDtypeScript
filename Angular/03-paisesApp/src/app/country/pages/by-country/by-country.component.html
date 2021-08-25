@@ -1,13 +1,15 @@
-<h1>By country</h1>
-<hr>
-
-<div class="row">
-    <div class="col">
-        <app-country-input placeHolder="Search country..." (onEnter)=search($event) (onDebounce)=suggest($event) ></app-country-input>
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h1>By country</h1>
+    <hr>
+    
+    <div class="row">
+        <div class="col">
+            <app-country-input placeHolder="Search country..." (onEnter)=search($event) (onDebounce)=suggest($event) ></app-country-input>
+        </div>
     </div>
+    
+    <hr>
 </div>
-
-<hr>
 
 <div *ngIf="havingError" class="alert alert-danger">
     The term "<strong><i>{{term}}</i></strong>" has not been found
