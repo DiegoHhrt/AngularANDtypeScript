@@ -6,6 +6,11 @@ import { Country } from '../../interfaces/country.interface';
   selector: 'app-by-country',
   templateUrl: './by-country.component.html',
   styles: [
+    `
+    li{
+      cursor: pointer;
+    }
+    `
   ]
 })
 export class ByCountryComponent{
@@ -15,8 +20,12 @@ export class ByCountryComponent{
   term:string = '';
   havingError: boolean=false;
   countries:Country[]=[];
+  showSuggestion: boolean = false;
+
+  suggestedCountries:Country[]=[];
   search(term:string)
   {
+    this.showSuggestion=false;
     this.havingError=false;
     this.term=term;
     this.countryService.searchCountry(this.term)
@@ -31,5 +40,15 @@ export class ByCountryComponent{
   suggest(term:string)
   {
     this.havingError=false;
+    this.term=term;
+    this.showSuggestion=true;
+
+    this.countryService.searchCountry(term)
+    .subscribe(countries => this.suggestedCountries= countries.splice(0,6),
+    (error) => this.suggestedCountries=[])
+  }
+  searchSuggestion( term:string)
+  {
+    this.search(term);
   }
 }
