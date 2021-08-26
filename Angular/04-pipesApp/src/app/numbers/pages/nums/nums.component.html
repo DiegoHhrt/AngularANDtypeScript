@@ -1,0 +1,25 @@
+<div class="text-layout">
+    <h1>Decimal pipes and percentages</h1>
+    <p>
+        Pipes incluidos en Angular de forma nativa, usualmente en el CommonModule
+    </p>
+</div>
+
+<div class="grid">
+    <div class="col-4">
+        <p-card header="Full" subheader="smthg">
+            <i class="pi pi-dollar"></i>
+            {{(full+12323.232) | number:'1.2-6'}}
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card header="Full" subheader="smthg">
+            {{ (full+12323.232)| currency:'MXN':'symbol-narrow':'1.0-4'}}
+        </p-card>
+    </div>
+    <div class="col-4">
+        <p-card header="%%%" subheader="percent">
+            {{percent | percent:'2.0-2'}}
+        </p-card>
+    </div>
+</div>
