@@ -1,9 +1,10 @@
 // Native Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FlexLayoutModule } from "@angular/flex-layout";
 //My modules
 import { HeroesRoutingModule } from './heroes-routing.module';
+import { MaterialModule } from '../material/material.module';
 
 //My components
 import { AddComponent } from './pages/add/add.component';
@@ -24,7 +25,9 @@ import { ListComponent } from './pages/list/list.component';
   ],
   imports: [
     CommonModule,
-    HeroesRoutingModule
+    HeroesRoutingModule,
+    FlexLayoutModule,
+    MaterialModule
   ]
 })
 export class HeroesModule { }
