@@ -15,6 +15,7 @@ import { ListComponent } from './pages/list/list.component';
 import { HeroCardComponent } from './components/hero-card/hero-card.component';
 import { HeroImagePipe } from './pipes/hero-image.pipe';
 import { FormsModule } from '@angular/forms';
+import { ConfirmComponent } from './components/confirm/confirm.component';
 
 
 
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     ListComponent,
     HeroCardComponent,
-    HeroImagePipe
+    HeroImagePipe,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
