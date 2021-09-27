@@ -6,11 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class SwitchesComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class SwitchesComponent {
+  person = {
+    gender: '',
+    notifications: true,
   }
 
+  terms: boolean = false;
 }
