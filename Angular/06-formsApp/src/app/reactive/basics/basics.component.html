@@ -1,1 +1,51 @@
-<p>basics works!</p>
+<h2>Template: basics</h2>
+
+<div class="row">
+    <div class="col">
+        <form (ngSubmit)="save()" autocomplete="off" [formGroup]="myForm">
+            <!-- product field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Product</label>
+                <div class="col-sm-9">
+                    <input formControlName="name" type="text" class="form-control" placeholder="Name of product">
+                    <span *ngIf="validField('name')" class="form-text text-danger">*It has to be at least 3 letters long</span>
+                </div>
+            </div>
+            <!-- Price field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Price</label>
+                <div class="col-sm-9">
+                    <input formControlName="price" type="number" class="form-control" placeholder="Price of product">                
+                    <span *ngIf="validField('price')" class="form-text text-danger">*The price has to be equal or more than 0</span>
+                </div>
+            </div>
+            <!-- Stock field -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Stock</label>
+                <div class="col-sm-9">
+                    <input formControlName="stock" type="number" class="form-control" placeholder="Stock of product">                
+                    <span *ngIf="validField('stock')" class="form-text text-danger">*The stock has to be equal or more than 0</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <span>Valid</span>
+        <pre> {{myForm.valid}} </pre>
+        <span>Pristine</span>
+        <pre> {{myForm.pristine}} </pre>
+        <span>Touched</span>
+        <pre> {{myForm.touched}} </pre>
+        <span>Value</span>
+        <pre> {{myForm.value | json}} </pre>
+    </div>
+</div>

@@ -1,1 +1,52 @@
-<p>dinamics works!</p>
+<h2>Reactive <small>Dinámicos</small></h2>
+
+<hr>
+
+<form (ngSubmit)="save()" [formGroup]="myForm" autocomplete="off">
+    <!-- Name -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+            <input  formControlName="name" class="form-control" placeholder="Name of someone">
+            <span *ngIf="validField('name')" class="form-text text-danger">*This field is obligatory an has to be 3 letters lenght</span>
+        </div>
+    </div>
+    <!-- Add favorite -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Add</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input [formControl]="newFav" class="form-control" placeholder="Add favorite" (keyup.enter)="addFav()">
+                <button type="button" class="btn btn-outline-primary" (click)="addFav()">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Favorite games list -->
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Game</label>
+        <div class="col-sm-9" formArrayName="favs">
+            <div class="input-group mb-1" *ngFor="let fav of favsArr.controls; let i= index">
+                <input [formControlName]="i" class="form-control" required (keyup.enter)="delete(i)">
+                <button type="button" class="btn btn-outline-danger" (click)="delete(i)">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button class="btn btn-primary float-end" type="button" (click)="save()">Save</button>
+        </div>
+    </div>
+</form>
+
+<span>Valid</span>
+<pre> {{myForm.valid}} </pre>
+<span>Value</span>
+<pre> {{myForm.value | json}} </pre>
+
+<span>Add Game</span>
+<pre>{{newFav.valid| json}}</pre>
+<pre>{{newFav.value| json}}</pre>
