@@ -1,0 +1,74 @@
+<h2>Reactive validations</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="submitForm()">
+            <!-- Name -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Name</label>
+                <div class="col-sm-9">
+                    <input formControlName="name" type="text" class="form-control" placeholder="User's name">
+                    <span *ngIf="validField('name')" class="form-text text-danger">*Format: Name Surename</span>
+                </div>
+            </div>
+            <!-- Email -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input formControlName="email" type="email" class="form-control" placeholder="User's email">
+                    <!-- <span *ngIf="requiredEmail()" class="form-text text-danger">*The email is obligatory</span>
+                    <span *ngIf="requiredFormat()" class="form-text text-danger">*You have to use a valid email</span>
+                    <span *ngIf="takenEmail()" class="form-text text-danger">*This email is already on use</span> -->
+                    <span *ngIf="validField('email')" class="form-text text-danger">*{{ emailErrormsg }}</span>
+                </div>
+            </div>
+            <!-- Username -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input formControlName="username" type="text" class="form-control" placeholder="User's codename">
+                    <span *ngIf="validField('username')" class="form-text text-danger">*Eren Jaeger is not allowed here</span>
+                </div>
+            </div>
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                    <input formControlName="password" type="password" class="form-control" placeholder="Password for account">
+                </div>
+                <span *ngIf="validField('password')" class="form-text text-danger">*The password has to be longer than 6 characters</span>
+            </div>
+            <!-- Password2 -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirm</label>
+                <div class="col-sm-9">
+                    <input formControlName="confirmPassword" type="password" class="form-control" placeholder="Password confirmation">
+                    <span *ngIf="validField('confirmPassword')" class="form-text text-danger">*The passwords have to be equal</span>
+                </div>
+            </div>
+            <!-- sender -->
+            <div class="row">
+                <div class="col">
+                    <button [disabled]="myForm.pending" type="submit" class="btn btn-primary float-end">Create account</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h2>Form Valid: {{myForm.valid}} </h2>
+<h2>Form Status: {{myForm.status}} </h2>
+<h2>Form Pending: {{myForm.pending}} </h2>
+<h2>Form errors: </h2>
+<pre> {{myForm.errors | json}}</pre>
+<h2>Name</h2>
+<pre> {{ myForm.controls.name.errors | json}} </pre>
+<h2>Email</h2>
+<pre> {{ myForm.controls.email.errors | json}} </pre>
+<h2>username</h2>
+<pre> {{ myForm.controls.username.errors | json}} </pre>
+<h2>Password</h2>
+<pre> {{ myForm.controls.password.errors | json}} </pre>
+<h2>Confirm</h2>
+<pre> {{ myForm.controls.confirmPassword.errors | json}} </pre>
