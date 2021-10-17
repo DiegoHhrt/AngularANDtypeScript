@@ -1,9 +1,56 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Country, CountrySmall } from '../interfaces/countries.interface';
+import { combineLatest, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountriesService {
 
-  constructor() { }
+  private baseUrl: string ="https://restcountries.com/v2"
+  private _regions : string[]=['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+
+  get regions (): string[]
+  {
+    return [...this._regions];
+  }
+
+  constructor(private http:HttpClient) { }
+
+  getCountryByRegion(region:string):Observable<CountrySmall[]>
+  { 
+    const url: string = `${this.baseUrl}/region/${region}?fields=alpha3Code,name`
+    return this.http.get<CountrySmall[]>(url);
+  }
+  getCountryByAlpha(code:string):Observable<Country | null>
+  {
+    if(!code)
+    {
+      return of(null)
+    }
+    const url = `${this.baseUrl}/alpha/${code}`
+    return this.http.get<Country>(url);
+  }
+  getCountrySmall(code:string):Observable<CountrySmall>
+  {
+    const url = `${this.baseUrl}/alpha/${code}?fields=alpha3Code,name`
+    return this.http.get<CountrySmall>(url);
+  }
+  getCountriesByCode(borders:string[]): Observable<CountrySmall[]>
+  {
+    if(!borders)
+    {
+      return of([])
+    }
+
+    const requests : Observable<CountrySmall>[] = []
+    borders.forEach(code => {
+      const request = this.getCountrySmall(code);
+      requests.push(request);
+    });
+
+    return combineLatest( requests );
+
+  }
 }
