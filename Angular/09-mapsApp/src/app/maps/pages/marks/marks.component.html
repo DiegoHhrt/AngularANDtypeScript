@@ -2,8 +2,15 @@
     <li class="list-group-item list-group-item-info" (click)="addMark()"> 
         + Add 
     </li>
-    <li class="list-group-item" (click)="goToMark()"> 
-        Marker 1 
+    <li *ngFor="let marker of marks; let i = index" 
+        class="list-group-item" 
+        (click)="goToMark( marker.marker! )" 
+        (dbClick)="deleteMarker( i )"
+        [ngStyle]="{
+            'background-color': marker.color
+        }"> 
+        Marker {{i+1}}
+        <span (click)="deleteMarker( i )">X</span>
     </li>
 
 </ul>
