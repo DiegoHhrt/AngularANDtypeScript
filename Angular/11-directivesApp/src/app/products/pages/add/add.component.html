@@ -1,26 +1,47 @@
-<h1 class="mt-5">Add Product</h1>
+<h1 class="mt-5">Add Product </h1>
 <hr>
 
-<form>
+<form [formGroup]="myForm">
 
     <div class="row g-3 align-items-center mb-3">
         <div class="col-auto">
             <label class="col-form-label">Name</label>
         </div>
         <div class="col-auto">
-            <input class="form-control">
+            <input class="form-control"
+                   formControlName="name">
         </div>
         <div class="col-auto">
-            <span class="form-text">*This field is required</span>
+            <span  [valid]="!hasError('name')" 
+                   errorMsg
+                   [color]="color"
+                   [message]="text"
+                   >
+            </span>
         </div>
     </div>
 
     <div class="row mt-3">
         <div class="col">
-            <button class="btn btn-primary"> Save </button>
+            <button class="btn btn-primary" (click)="changeColor()"> Change Color </button>
+        </div>
+    </div>
+    <div class="row mt-3 ml-5">
+        <div class="col">
+            <button class="btn btn-primary" (click)="changeText()"> Change Text </button>
         </div>
     </div>
 
 </form>
 
 <h3 class="mt-5">Form</h3>
+<pre>Valid {{ myForm.valid }} </pre>
+<pre>Value  {{myForm.value | json}} </pre>
+
+<div class="row mt-5" *customIf="myForm.valid">
+    <div class="col">
+        <div class="alert alert-primary">
+            All gufr 
+        </div>
+    </div>
+</div>
