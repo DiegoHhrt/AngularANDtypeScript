@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConnect } = require('./database/config');
+const path = require('path');
 require('dotenv').config();
 
 //creación de servidor/app express
@@ -20,6 +21,11 @@ app.use(express.json());
 
 //Routes
 app.use( '/api/auth', require('./routes/auth') );
+
+//Every other route
+app.get('*', (req, resp) => {
+    resp.sendFile(path.resolve(__dirname, 'public/index.html'));
+});
 
 app.listen(process.env.PORT, () =>{
     console.log(`Server running in port ${ process.env.PORT }`)
