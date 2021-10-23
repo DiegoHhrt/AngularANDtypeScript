@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<h1>Dashboard</h1>
+<hr>
+
+<p>This page only works authenticated</p>
+
+<h4>User info</h4>
+<pre> {{user | json}} </pre>
+
+<button (click)="logout()">Log out</button>

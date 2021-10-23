@@ -33,7 +33,8 @@ const newUser= async (req=request, resp=response) => {
             ok: true,
             uid: dbUser.id,
             name,
-            token
+            token,
+            email
         });
 
     } 
@@ -81,6 +82,7 @@ const userLogin = async (req=request, resp=response) => {
             ok: true,
             uid: dbUser.id,
             name: dbUser.name,
+            email: dbUser.email,
             token
         });
     } 
@@ -95,15 +97,20 @@ const userLogin = async (req=request, resp=response) => {
 }
 
 const tokenRenew = async (req=request, resp=response) => {
-    const {uid, name}=req;
+    const {uid}=req;
 
-    const token = await newJWt(uid, name);
+    //read db to get email
+    const dbUser = await User.findById(uid);
+
+    const token = await newJWt(uid, dbUser.name);
     
     return resp.json({
         ok:true,
         uid,
-        name, 
-        token
+        name: dbUser.name,
+        email: dbUser.email, 
+        token,
+        
     })
 }
 
